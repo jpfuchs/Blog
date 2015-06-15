@@ -1,0 +1,211 @@
+<?php 
+
+include "globals/header.phtml"; ?>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Blog Post -->
+
+                <!-- Title -->
+                <h1>Blog Post Title</h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    by <a href="#"><?php echo $unArticle["auteur"]; ?></a>
+                </p>
+
+                <hr>
+
+
+
+
+                <!-- Date/Time -->
+                <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+
+                <hr>
+
+
+
+                <!-- Preview Image -->
+             
+                 <img class="img-responsive" src="vue/images/<?php echo $unArticle["image"]; ?>" alt="">
+
+                <hr>
+
+
+                   <p><?php  echo getLittleDescription($unArticle["description"], 200); ?></p>
+
+                <!-- Post Content -->
+               <!-- <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>-->
+
+                <hr>
+
+
+
+
+                <!-- Blog Comments -->
+
+                <!-- Comments Form -->
+                <div class="well">
+                    
+                    <h4>Leave a Comment:</h4>
+                      
+                     <!-- <?php if (! empty ($erreurs)) { ?>
+
+
+                         <?php foreach ($erreurs as $key => $value) { ?>
+
+                                   
+                              <p style="font-weight:bold;color:red"> <?php echo $value; ?> </p>   
+                           
+                        <?php } ?>
+                       
+
+                     <?php } ?>-->
+
+
+                     <?php if (! empty ($erreurs)) { ?>
+
+                        <?php foreach ($erreurs as $uneErreur) {
+                            
+                            echo " <p class='alert alert-danger'>".$uneErreur."</p>";
+
+
+                        } ?>
+
+                     <?php } ?>
+
+                    <form  id="formComm" role="form" method="POST" index="articleController.php">
+                        <div class="form-group">
+                            <!--<textarea class="form-control" rows="3"></textarea>-->
+                            <input id="myNom" type="text" name="nom" placeHolder="Nom">
+                             <span class="error"></span>
+                             <div id="test"></div>
+                            
+                            <input type="hidden" name="idEtudiant" value=<?php echo $unArticle["id"]; ?> >
+                           
+                            <textarea  id="comment" name="zone-area" class="form-control" rows="3"></textarea>
+                             <span class="error"></span>
+
+                        </div>
+                        <button id="myButton" type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+                    <p id ="titi"></p> 
+
+                     <hr>
+                </div>
+
+
+
+                <?php 
+
+                if (isset($successAddCommentaire) && $successAddCommentaire ==TRUE)
+                {
+
+                      echo " <p class='alert alert-success'>bravo ! </p>";
+                }
+
+                ?>
+
+              
+
+                <!-- Posted Comments -->
+
+                <!-- Comment -->
+          <div id="allComments">
+          <?php if (!empty ($touslescommentaires)) { ?>
+
+
+                 <?php foreach ($touslescommentaires  as $key => $value) : ?>
+
+                    <div class="media">
+                        <a class="pull-left" href="#">
+                           <!-- <img class="media-object" src="http://placehold.it/64x64" alt="">-->
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><?php echo $value["utilisateur"]."<br/>"; ?>
+                                <small>
+                                    <?php
+
+                                     $date = date("d/m/Y", strtotime($value["date_commentaire"]));  
+
+                                     //echo $value["date_commentaire"]."<br/>"; 
+
+                                      echo $date; 
+
+                                     ?>
+
+                                </small>
+                            </h4>
+
+                            <div class="jpf" data-score="<?php echo $value["note"] ; ?>"></div>
+
+                           <!--<?php echo "note obtenue: ".$value["note"]."<br/>"; ?>-->
+
+                           <?php echo $value["contenu"]."<br/>"; ?>
+                        </div>
+                    </div>
+
+                <?php  endforeach;  ?>  
+            </div>
+
+            <?php } 
+
+            else  echo "<p id='testmess'>cet article n'a pas de commentaires</p>" ?>
+
+
+                <!-- Comment -->
+                <!--<div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="http://placehold.it/64x64" alt="">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">Start Bootstrap
+                            <small>August 25, 2014 at 9:30 PM</small>
+                        </h4>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                        <!-- Nested Comment -->
+                       
+
+                        <!--<div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="http://placehold.it/64x64" alt="">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">Nested Start Bootstrap
+                                    <small>August 25, 2014 at 9:30 PM</small>
+                                </h4>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                            </div>
+                        </div>
+                        <!-- End Nested Comment -->
+                   <!-- </div>
+                </div>
+
+            </div>-->
+
+
+
+          <?php 
+
+            include "globals/sidebar.phtml"; ?>
+
+            </div>
+
+        </div>
+        <!-- /.row -->
+
+   
+
+      <?php  include "globals/footer.phtml"; ?>

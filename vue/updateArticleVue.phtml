@@ -1,0 +1,120 @@
+<?php 
+  include "globals/header.phtml"; ?>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" method="POST" action="" enctype="multipart/form-data">
+
+       
+        <div id="tt">
+          <input type="text"  name="inputTitre" class="form-control"  placeholder ="titre" value="<?php echo $article["titre"]; ?>" autofocus >
+        </div>
+
+       <!-- <div id="tt1">
+          <input type="text"  value="<?php echo $article["description"]; ?> name="inputDescription" class="form-control"  placeholder ="description" autofocus>
+        </div>-->
+
+      <textarea id="tt1" name="inputDescription" rows="10" cols="50"><?php echo $article["description"]; ?></textarea>
+
+
+        <div id="tt2">
+            <input type="text"  id="datepicker" name="inputDate" class="form-control">
+        </div>
+       
+       <div id="tt3">
+         
+         <select name="inputAuteur">
+
+          <?php foreach ($auteur as $key => $value) : ?>
+
+               <?php if ($value["id"] == $article["id_auteur"]) : ?>
+
+                  <option value="<?php echo $value["id"];  ?>" selected > <?php  echo $value["nom"]; ?> </option>
+               
+               <?php else: ?>
+
+                <option value="<?php echo $value["id"];  ?>" > <?php  echo $value["nom"]; ?></option>
+
+
+               <?php endif; ?>
+          
+          <?php endforeach; ?>   
+
+          </select>
+      </div>
+
+
+        <div id="tt33">
+          <input type="file"  name="inputImage">
+        </div>
+
+
+       <div id="tt4">
+
+         <select name="inputCategorie">
+
+            
+
+          <?php foreach ($categorie as $key => $value) : ?>
+
+                <?php if ($value["id"] == $article["id_categorie"]) : ?>
+
+                  <option value="<?php echo $value["id"]; ?>" selected > <?php  echo $value["nom"];  ?> </option> 
+
+               <?php else: ?>
+
+                 <option value="<?php echo $value["id"]; ?>"> <?php  echo $value["nom"];  ?> </option> 
+
+               <?php endif; ?>
+          
+          <?php endforeach; ?>   
+
+
+          </select>
+      </div>
+
+
+      <div id="tt5">
+        <button name="" type="submit">Valider</button>
+      </div>
+        
+
+      
+      </form>
+
+      <?php
+
+         if (isset($successAddArticle) && ($successAddArticle== TRUE ) )
+       {
+          echo "<p class='alert alert-success'> Mise à jour OK <p>";
+       }
+
+       if (empty($erreurs) == TRUE)
+       {
+          echo "<p class='alert alert-danger'> Mise à jour KO <p>";
+       }  
+
+        ?>
+
+  <?php 
+     
+     /*if ( isset ($successAddArticle) && $successAddArticle == TRUE)
+      {
+        echo "<p class='alert alert-sucess'>"."article bien inséré"."</p>";
+      }
+      else
+      {
+        echo "<p class='alert alert-success'>"."article non inséré"."</p>";
+      }*/
+
+   ?>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<?php 
+  include "globals/header.phtml"; ?>
+
+  <body>
+
+    <div class="container">
+
+      <form class="form-signin" method="POST" action="index.php?page=ajoutCategorie">
+
+       
+        <div id="tt">
+          <input type="text"  name="inputNom" class="form-control"  placeholder ="titre" autofocus>
+        </div>
+
+        <div id="tt1">
+          <input type="text"  name="inputDescription" class="form-control"  placeholder ="description" autofocus>
+        </div>
+
+
+      <div id="tt5">
+        <button name="" type="submit">Valider</button>
+      </div>
+        
+
+      
+      </form>
+
+  <?php 
+     
+      if ( isset ($successAddCategorie) && $successAddCategorie == TRUE)
+      {
+        echo "<p class='alert alert-sucess'>"."categorie bien insérée"."</p>";
+      }
+
+   ?>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+  </body>
+</html>

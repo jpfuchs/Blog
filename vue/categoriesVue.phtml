@@ -1,0 +1,29 @@
+  <?php 
+
+include "globals/header.phtml"; ?>
+
+<div class="container">
+ <div class="col-md-8">
+  <div class="row">
+
+
+     <?php foreach ($categories  as $key => $value) : ?>
+
+        <div class="col-md-4">
+          <h2><?php echo $value["nom"]."<br/>"; ?></h2>
+          <p><?php echo $value["description"]."<br/>"; ?></p>
+          <p><a class="btn btn-default"  href="index.php?page=unecategorie&id=<?php echo $value["id"]; ?>" role="button">View details &raquo;</a></p>
+        </div>
+     
+       
+      <?php  endforeach;  ?>  
+
+    </div>
+  </div> 
+  <?php 
+
+
+    include "globals/sidebar.phtml"; ?>
+
+    
+  <?php  include "globals/footer.phtml"; ?>
